@@ -4,6 +4,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
+	request.setCharacterEncoding("UTF-8"); //post일때 한글깨지는 문제 해결
+
+	PhoneDao phoneDao = new PhoneDao();
+
 	//파라미터에서 꺼내기
 	String name = request.getParameter("name");
 	String hp = request.getParameter("hp");
@@ -14,14 +18,23 @@
 	PersonVo personVo = new PersonVo(name, hp, company);
 	
 	//저장하기
-	PhoneDao phoneDao = new PhoneDao();
 	phoneDao.personInsert(personVo);
 	
 	
-	//리스트 가져오기
-	List<PersonVo> personList = phoneDao.getPersonList();
+	//리스트 가져오기-->리다이렉트
+	//List<PersonVo> personList = phoneDao.getPersonList();
+	
+	
+	response.sendRedirect("./list.jsp");
+	
 	
 %>
+
+
+
+
+
+<%-- 
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,3 +71,4 @@
 
 </body>
 </html>
+--%>

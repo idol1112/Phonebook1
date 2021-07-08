@@ -105,7 +105,8 @@ public class PhoneDao {
 			query += "         name, ";
 			query += "         hp, ";
 			query += "         company ";
-			query += " from person";
+			query += " from person ";
+			query += " order by person_id asc ";
 
 			if (keword != "" || keword == null) {
 				query += " where name like ? ";
@@ -204,6 +205,47 @@ public class PhoneDao {
 
 		close();
 		return count;
+	}
+	
+	//사람 1명 가져오기
+	public PersonVo getPerson(int personId) {
+		
+		PersonVo personVo = null;
+		getConnection();
+
+		try {
+
+			// 3. SQL문 준비 / 바인딩 / 실행 --> 완성된 sql문을 가져와서 작성할것
+			String query = "";
+			query += " select  person_id, ";
+			query += "         name, ";
+			query += "         hp, ";
+			query += "         company ";
+			query += " from person ";
+			query += " where person_id = ? ";
+	
+			pstmt = conn.prepareStatement(query); // 쿼리로 만들기
+			pstmt.setInt(1, personId);
+			rs = pstmt.executeQuery();
+			
+			// 4.결과처리
+			while (rs.next()) {
+				int pId = rs.getInt("person_id");
+				String name = rs.getString("name");
+				String hp = rs.getString("hp");
+				String company = rs.getString("company");
+				
+				personVo = new PersonVo(pId, name, hp, company);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		close();
+		
+		return personVo;
+		
 	}
 }
 	

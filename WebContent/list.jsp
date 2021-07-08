@@ -30,7 +30,7 @@ List<PersonVo> personList = phoneDao.getPersonList();
    %>
       <table border="1">
          <tr>
-            <td>이름</td>
+            <td>이름[<%= personList.get(i).getPersonId() %>]</td>
             <td><%= personList.get(i).getName() %></td>
          </tr>
          <tr>
@@ -40,6 +40,10 @@ List<PersonVo> personList = phoneDao.getPersonList();
          <tr>
             <td>회사</td>
             <td><%= personList.get(i).getCompany() %></td>
+         </tr>
+         <tr>
+            <td><a href ="./updateForm.jsp?id=<%= personList.get(i).getPersonId() %>">[수정]</a></td>
+            <td><a href ="./delete.jsp?id=<%= personList.get(i).getPersonId() %>">[삭제]</a></td>
          </tr>
       </table>
       <br>
