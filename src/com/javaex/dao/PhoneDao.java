@@ -10,7 +10,7 @@ import java.util.List;
 import com.javaex.vo.PersonVo;
 
 public class PhoneDao {
-
+	//테스트
 	// 0. import java.sql.*;
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
